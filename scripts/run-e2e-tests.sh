@@ -2,6 +2,13 @@
 # Move to the Protractor test project folder
 cd $HOME
 
+if [ -n "$MANUAL" ]; then
+  # if manual mode is enabled, just coast making supervisord happy
+  while true; do
+    sleep 60
+  done
+fi
+
 # Remove previous Allure results
 rm -rf allure-results
 
@@ -28,7 +35,7 @@ echo "Running Protractor tests"
 DISPLAY=:10 protractor $@
 export RESULT=$?
 
-echo "Protractor tests have done"
+echo "Protractor tests are done"
 # Close the XVFB display
 killall Xvfb
 # Remove temporary folders
